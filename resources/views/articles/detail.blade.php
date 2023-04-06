@@ -14,10 +14,10 @@
         Category: <b>{{ $article->category->name }}</b>
       </div>
       <p class="card-text">{{ $article->body }}</p>
-      <a class="btn btn-warning" href="{{ url(" /articles/delete/$article->id") }}">
+      <a class="btn btn-warning" href="{{ url("/articles/delete/$article->id") }}">
         Delete
       </a>
-      <a class="btn btn-primary" href="{{ url(" /articles/edit/$article->id") }}">
+      <a class="btn btn-primary" href="{{ url("/articles/edit/$article->id") }}">
         Edit
       </a>
     </div>
