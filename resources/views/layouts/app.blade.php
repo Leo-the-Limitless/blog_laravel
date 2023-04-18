@@ -26,9 +26,17 @@
     <div id="app">
       <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
         <div class="container">
-          <a class="navbar-brand" href="{{ url('/') }}">
-            {{ config("app.name", "Laravel") }}
+          @auth
+          <a class="navbar-brand text-primary" href="{{ url('/') }}">
+            Articles
           </a>
+          <a class="navbar-brand text-danger" href="{{ url('/products') }}">
+            Products
+          </a>
+          <a class="navbar-brand text-success" href="{{ url('/categories') }}">
+            Categories
+          </a>
+          @endauth
           <button
             class="navbar-toggler"
             type="button"
@@ -43,22 +51,14 @@
 
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <!-- Left Side Of Navbar -->
-            <ul class="navbar-nav mr-auto">
+            <!-- <ul class="navbar-nav mr-auto">
               <li class="nav-item">
-                @auth
-                <a
-                  class="nav-link text-success"
-                  href="{{ url('/articles/add') }}"
-                >
-                  + Add Article
-                </a>
-                @endauth
               </li>
-            </ul>
+            </ul> -->
 
             <!-- Right Side Of Navbar -->
             <ul class="navbar-nav ms-auto">
-              @if (Auth::user() && Auth::user()->isAdmin == 1)
+              @if (Auth::user() && Auth::user()->status == 1)
                 <li class="nav-item">
                 <a
                   class="nav-link text-success"
@@ -69,16 +69,6 @@
               </li>
               @endif
               
-              @if (Auth::user() && Auth::user()->isAdmin == 2)
-              <li class="nav-item">
-                <a
-                  class="nav-link text-success"
-                  href="{{ url('/approved-user') }}"
-                >
-                  Approved Users Only
-                </a>
-              </li>
-              @endif
               <!-- Authentication Links -->
               @guest @if (Route::has('login'))
               <li class="nav-item">

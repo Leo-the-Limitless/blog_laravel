@@ -12,28 +12,24 @@
   <form method="post">
     @csrf
     <div class="mb-3">
-      <label>Title</label>
-      <input type="text" name="title" class="form-control" value="{{ $autofillers["title"] }}"/>
+      <label>Product Name</label>
+      <input type="text" name="name" class="form-control" />
     </div>
     <div class="mb-3">
-      <label>Body</label>
-      <textarea name="body" class="form-control">{{ $autofillers["body"] }}
-      </textarea>
+      <label>Details</label>
+      <textarea name="details" class="form-control"></textarea>
     </div>
     <div class="mb-3">
       <label>Category</label>
       <select class="form-select" name="category_id">
         @foreach($categories as $category)
-        <option value="{{ $category['id'] }}"
-          @if ($autofillers["category_id"] == $category->id)
-            {{'selected="selected"'}}
-          @endif>
+        <option value="{{ $category['id'] }}">
           {{ $category["name"] }}
         </option>
         @endforeach
       </select>
     </div>
-    <input type="submit" value="Edit Article" class="btn btn-primary" />
+    <input type="submit" value="Add Product" class="btn btn-primary" />
   </form>
 </div>
 @endsection

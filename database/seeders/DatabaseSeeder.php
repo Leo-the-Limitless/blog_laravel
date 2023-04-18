@@ -6,7 +6,9 @@ use Illuminate\Database\Seeder;
 use App\Models\Article;
 use App\Models\Category;
 use App\Models\Comment;
+use App\Models\Product;
 use App\Models\User;
+use App\Models\ProductComment;
 
 class DatabaseSeeder extends Seeder
 {
@@ -28,7 +30,9 @@ class DatabaseSeeder extends Seeder
     User::factory()->create([
         "name" => "Bob",
         "email" => "bob@gmail.com",
-    ]);
+    ]); 
 
+    Product::factory()->count(15)->create();
+    ProductComment::factory()->count(25)->create();
   }
 }

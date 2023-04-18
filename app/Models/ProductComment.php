@@ -5,9 +5,9 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use App\Models\User;
-use App\Models\Article;
+use App\Models\Product;
 
-class Comment extends Model
+class ProductComment extends Model
 {
     use HasFactory;
 
@@ -15,7 +15,7 @@ class Comment extends Model
         return $this->belongsTo(User::class);
     }
 
-    public function article() {
-        return $this->belongsTo(Article::class);
+    public function product() {
+        return $this->belongsTo(Product::class);
     }
 }

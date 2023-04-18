@@ -1,25 +1,28 @@
 @extends("layouts.app")
 @section("content")
-@if(session('error'))
-<div class="alert alert-warning">
-{{ session('error') }}
-</div>
-@endif
 <div class="container">
+  @if(session('error'))
+  <div class="alert alert-warning">
+  {{ session('error') }}
+  </div>
+  @endif
   <div class="card mb-2">
     <div class="card-body">
       <h5 class="card-title">{{ $article->title }}</h5>
       <div class="card-subtitle mb-2 text-muted small">
         {{ $article->created_at->diffForHumans() }},
+        Author: <b>{{ $article->user->name }}</b>,
         Category: <b>{{ $article->category->name }}</b>
       </div>
       <p class="card-text">{{ $article->body }}</p>
-      <a class="btn btn-warning" href="{{ url(" /articles/delete/$article->id") }}">
+      @if (auth()->user()->status == 2)
+      <a class="btn btn-warning" href="{{ url("/articles/delete/$article->id") }}">
         Delete
       </a>
-      <a class="btn btn-primary" href="{{ url(" /articles/edit/$article->id") }}">
+      <a class="btn btn-primary" href="{{ url("/articles/edit/$article->id") }}">
         Edit
       </a>
+      @endif
     </div>
   </div>
   <ul class="list-group">

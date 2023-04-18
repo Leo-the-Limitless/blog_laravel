@@ -6,8 +6,13 @@ use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Gate;
 use App\Models\User;
 
-class RoleController extends Controller
+class AdminController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
+
     public function admin() {
         if (Gate::allows('is-admin')) {
             return view('roles.adminPage');
@@ -30,16 +35,13 @@ class RoleController extends Controller
 
     public function approve($id) {
         $user = User::find($id);
-        $user->isAdmin = 2;
-        $user->save();
-        return back();
-    }
 
-    public function approvedUser() {
-        if (Gate::allows('is-approved-user')) {
-            return view('roles.approvedUserPage');
-        } else {
-            abort(403);
+        if ($user->status == 0) {
+            $user->status = 2;
+            $user->save();
+            return back();
         }
+
+        return back();
     }
 }

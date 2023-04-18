@@ -17,9 +17,11 @@
         {{ $user->created_at->format('d-m-Y') }}
       </div>
       <div class="col">
+        @if ($user->status == 0)
         <a href="{{ url("/users-list/approve/$user->id") }}" class="btn btn-success">
           Approve
         </a>
+        @endif
       </div>
     </div>
   </div>

@@ -1,9 +1,13 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\ArticleController;
-use App\Http\Controllers\CommentController;
-use App\Http\Controllers\RoleController;
+use App\Http\Controllers\Article\ArticleController;
+use App\Http\Controllers\Article\CommentController;
+use App\Http\Controllers\AdminController;
+use App\Http\Controllers\CategoryController;
+use App\Http\Controllers\Product\ProductController;
+use App\Http\Controllers\Product\ProductCommentController;
+use App\Http\Controllers\ResultController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,13 +20,11 @@ use App\Http\Controllers\RoleController;
 |
 */
 
-Route::get('/admin', [RoleController::class, 'admin']);
+Route::get('/admin', [AdminController::class, 'admin']);
 
-Route::get('/users-list', [RoleController::class, 'usersList']);
+Route::get('/users-list', [AdminController::class, 'usersList']);
 
-Route::get('/users-list/approve/{id}', [RoleController::class, 'approve']);
-
-Route::get('/approved-user', [RoleController::class, 'approvedUser']);
+Route::get('/users-list/approve/{id}', [AdminController::class, 'approve']);
 
 Route::get('/articles/add', [ArticleController::class, 'add']);
 
@@ -61,6 +63,86 @@ Route::post('/comments/add', [
 Route::get('/comments/delete/{id}', [
   CommentController::class,
   'delete'
+]);
+
+Route::get('/products', [
+  ProductController::class,
+  'products'
+]);
+
+Route::get('/products/detail/{id}', [
+  ProductController::class, 
+  'detail'
+]);
+
+Route::get('/products/add', [
+  ProductController::class,
+  'add'
+]);
+
+Route::post('/products/add', [
+  ProductController::class,
+  'create'
+]);
+
+Route::get('/products/delete/{id}', [
+  ProductController::class, 
+  'delete'
+]);
+
+Route::get('/products/edit/{id}', [
+  ProductController::class, 
+  'edit'
+]);
+
+Route::get('/products/edit/{id}', [
+  ProductController::class, 
+  'edit'
+]);
+
+Route::post('/products/edit/{id}', [
+  ProductController::class, 
+  'update'
+]);
+
+Route::get('/categories', [
+  CategoryController::class,
+  'index'
+]);
+
+Route::get('/categories/add', [
+  CategoryController::class,
+  'add'
+]);
+
+Route::post('/categories/add', [
+  CategoryController::class,
+  'create'
+]);
+
+Route::get('/categories/detail/{id}', [
+  CategoryController::class,
+  'detail'
+]);
+
+Route::post('/product-comments/add', [
+  ProductCommentController::class,
+  'create'
+]);
+
+Route::get('/product-comments/delete/{id}', [
+  ProductCommentController::class,
+  'delete'
+]);
+
+Route::post('/articles/results', [
+  ResultController::class,
+  'articles'
+]);
+
+Route::post('/products/results', [
+  ResultController::class,
+  'products'
 ]);
 
 Auth::routes();
